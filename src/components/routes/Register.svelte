@@ -1,34 +1,39 @@
 <script>
-  const handleform = (e) => {
-    e.preventDefault()
-    e.target.reset()
+  let title = 'Titulo'
+  let text = 'Digite aqui seu texto'
+  
+  const handleclick = (e) => {
+    e.target.innerHTML =''
   }
 </script>
-<div class="register">
-  <form on:submit={handleform}>
-    <input type="text" placeholder="Titulo">
-    <textarea placeholder="Digite aqui seu texto."></textarea>
-    <input type="submit" value="Salvar">
-  </form>
+
+<div class="register" on:click={handleclick}>
+  <div 
+    contenteditable="true" 
+    bind:innerHTML={title} 
+    spellcheck="true" 
+    class="title"
+  ></div>
+  <div contenteditable="true" 
+    bind:innerHTML={text} 
+    spellcheck="true"
+  ></div>
 </div>
 
 <style>
   .register{
-    height: 90vh;
-    margin: 0 2%;
-  }
-  .register form {
-    height: 100%;
-		display: flex;
-		flex-direction: column;
-    justify-content: space-around;
-  }
-  .register form input, textarea {
-    margin-top: 2%;
+    margin: 2%;
+    display: flex;
+    flex-direction: column;
     font-size: 1.4rem;
   }
-  .register form textarea{
-    flex: 1;
-    resize: none;
+  .title{
+    font-size: 1.8rem;
+  }
+  .register > *{
+    padding: 5px;
+    background: #444;
+    border-radius: 4px;
+    margin-bottom: 2px;
   }
 </style>
