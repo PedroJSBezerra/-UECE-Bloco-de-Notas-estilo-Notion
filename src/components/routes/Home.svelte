@@ -1,10 +1,17 @@
 <script>
-  import Register from './Register.svelte'
+  import Block from './Block.svelte'
 </script>
 
 <div class="home">
-  <Register />
+  <Block />
 </div>
 
 <style>
+  .home{
+    position: relative;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    overflow: auto;
+  }
 </style>
