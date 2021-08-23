@@ -1,4 +1,4 @@
-<div class="burguer">
+<div class="burguer" on:click>
   <span></span><span></span><span></span>
 </div>
 <style>

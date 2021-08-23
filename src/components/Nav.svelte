@@ -1,13 +1,22 @@
 <script>
   import Burguer from './Burguer.svelte'
   import Profile from './Profile.svelte'
+
+  let open = false
 </script>
+
 <div class="nav">
   <h3 class="title">First text note</h3>
-  <Burguer />
-  <div class="leftpanel">
-    <Profile />
-  </div>
+  <Burguer on:click="{() => open = !open}"/>
+  {#if open}
+    <div class="leftpanel open">
+      <Profile />
+    </div>
+  {:else}
+    <div class="leftpanel">
+      <Profile />
+    </div>
+  {/if}
 </div>
 
 <style>
@@ -40,5 +49,9 @@
     inset: 0 0;
     background: #555;
     z-index: 1;
+    transform: translateX(-100%);
+  }
+  .open{
+    transform: translateX(0);
   }
 </style>

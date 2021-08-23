@@ -1,17 +1,18 @@
 <script>
-  let user = {
-    name: 'Google user name',
-    photoURL: ''
-  }
+  import {auth} from '../firebase'
 
   const logout = () => {
-    console.log('loged out')
+    auth.signOut().then(function () {
+      
+      console.log('loged out')
+
+    })
   }
 </script>
 
 <div class="profile">
-  <img class="photo" src={user.photoURL} alt="">
-  <div class="name">{user.name}</div>
+  <img class="photo" src={auth.currentUser.photoURL} alt="">
+  <div class="name">{auth.currentUser.displayName}</div>
   <button class="logout" on:click={logout}>logout</button>
 </div>
 
