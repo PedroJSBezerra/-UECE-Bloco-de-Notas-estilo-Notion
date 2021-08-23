@@ -2,19 +2,29 @@
   import Nav from './components/Nav.svelte'
 	import Home from "./components/Home.svelte";
 	import Login from './components/Login.svelte'
-	import {user} from './stores'
 
-	let user_loged
+	import { auth } from './firebase'
 	
-	const unsubscribe = user.subscribe(value => {
-		user_loged = value
+	let user = false
+	console.log(user)
+
+	auth.onAuthStateChanged(function(usr){	
+		user = usr
 	})
 
-	console.log(user_loged)
+	$:
+	if(user){
+		console.log('user signed in: '+user.displayName)
+		user = true
+	}else{
+		console.log('no user signed in')
+		user = false
+	}
+	
 </script>
 
 <div class="app">
-	{#if user_loged}
+	{#if user}
 		<Nav />
 		<Home />
 	{:else}
