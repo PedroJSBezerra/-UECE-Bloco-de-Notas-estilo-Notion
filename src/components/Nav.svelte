@@ -1,9 +1,13 @@
 <script>
   import Burguer from './Burguer.svelte'
+  import Profile from './Profile.svelte'
 </script>
 <div class="nav">
   <h3 class="title">First text note</h3>
   <Burguer />
+  <div class="leftpanel">
+    <Profile />
+  </div>
 </div>
 
 <style>
@@ -26,5 +30,15 @@
     width: 100%;
     height: 2px;
     background: rgba(255,255,255,.2);
+  }
+  .leftpanel{
+    display: flex;
+    flex-direction: column;
+    height: 100vh;
+    width: 80vw;
+    position: fixed;
+    inset: 0 0;
+    background: #555;
+    z-index: 1;
   }
 </style>
