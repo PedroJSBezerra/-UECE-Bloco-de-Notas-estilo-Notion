@@ -8,15 +8,9 @@
 <div class="nav">
   <h3 class="title">First text note</h3>
   <Burguer on:click="{() => open = !open}"/>
-  {#if open}
-    <div class="leftpanel open">
-      <Profile />
-    </div>
-  {:else}
-    <div class="leftpanel">
-      <Profile />
-    </div>
-  {/if}
+  <div class="{open ? 'leftpanel open': 'leftpanel'}">
+    <Profile />
+  </div>
 </div>
 
 <style>
