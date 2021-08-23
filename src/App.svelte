@@ -1,18 +1,24 @@
 <script>
-	import {loged} from './components/stores/Auth'
-  import Nav from './components/routes/Nav.svelte'
-	import Home from "./components/routes/Home.svelte";
-	import Login from './components/routes/Login.svelte'
+  import Nav from './components/Nav.svelte'
+	import Home from "./components/Home.svelte";
+	import Login from './components/Login.svelte'
+	import {user} from './stores'
 
-	console.log('loged: '+$loged)
+	let user_loged
+	
+	const unsubscribe = user.subscribe(value => {
+		user_loged = value
+	})
+
+	console.log(user_loged)
 </script>
 
 <div class="app">
-	<Nav />
-	{#if $loged}
+	{#if user_loged}
+		<Nav />
 		<Home />
 	{:else}
-		<Login/>
+		<Login />
 	{/if}
 </div>
 
