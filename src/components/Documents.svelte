@@ -1,8 +1,8 @@
 <script>
   let documents = [
-    {title: 'document 1'},
-    {title: 'document 2'},
-    {title: 'document 3'},
+    {title: 'Clients'},
+    {title: 'Products'},
+    {title: 'services'},
     {title: 'document 4'},
     {title: 'document 5'},
   ]
