@@ -8,18 +8,16 @@
 	let user = false
 	console.log(user)
 
+	//esta função dispara sempre que o estado de login muda
 	auth.onAuthStateChanged(function(usr){	
-		user = usr
+		if(usr){
+			console.log('user signed in: '+usr.displayName)
+			user = true
+		}else{
+			console.log('no user signed in')
+			user = false
+		}
 	})
-
-	$:
-	if(user){
-		console.log('user signed in: '+user.displayName)
-		user = true
-	}else{
-		console.log('no user signed in')
-		user = false
-	}
 	
 </script>
 

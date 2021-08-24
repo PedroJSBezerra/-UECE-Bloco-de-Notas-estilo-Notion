@@ -1,6 +1,7 @@
 <script>
   import Burguer from './Burguer.svelte'
   import Profile from './Profile.svelte'
+  import Documents from './Documents.svelte'
 
   let open = false
 </script>
@@ -10,6 +11,7 @@
   <Burguer on:click="{() => open = !open}"/>
   <div class="{open ? 'leftpanel open': 'leftpanel'}">
     <Profile />
+    <Documents />
   </div>
 </div>
 
