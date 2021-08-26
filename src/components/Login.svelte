@@ -1,37 +1,37 @@
 <script>
-  import { auth, googleProvider } from "../firebase";
-  let src = "assets/btn_google_signin_dark_normal_web.png";
+  let Button = 'assets/button_login.png'
+	import {auth, googleProvider} from '../firebase'
 
-  function login() {
-    auth
-      .signInWithPopup(googleProvider)
-      .then((result) => {
-        let uuid = result.user.uid;
-        let photo = result.user.photoURL;
-      });
-  }
+  const login = () => {
+		auth.signInWithPopup(googleProvider)
+    // usa a resposta do loging se precisar
+    // .then((result) => {
+		// 	user = {
+		// 		uuid: result.user.uid,
+		// 		photo: result.user.photoURL
+		// 	}
+		// })
+	}
+
 </script>
 
 <div class="login">
-  <button on:click={login}>
-    <img {src} alt="Login with Google" />
-  </button>
+  <h3>Externapp</h3>
+  <p>Cadastro com foco em geolocalização.</p>
+  <p>Com o Externapp voçê obtêm as coodenadas geograficas do dispositivo.</p>
+  <p>Que tal cadastrar um cliente e nunca mais precisar decorar seu endereço?</p>
+  <p>Para começar faça o login.</p>
+  <input on:click={login} class="loginbutton" type="image" src="{Button}" alt="Login com Google">
 </div>
 
 <style>
-  .login {
-    position: absolute;
-    top: 50%;
-    left: 50%;
-    transform: translate(-50%, -50%);
-  }
-  .login button {
-    background: none;
-    width: 189px;
-    height: 44px;
-
+  .login{
+    height: 100%;
+    padding: 0 10px;
     display: flex;
-    align-items: center;
-    justify-content: center;
+    flex-direction: column;
+  }
+  .login > *{
+    margin-top: 1rem;
   }
 </style>

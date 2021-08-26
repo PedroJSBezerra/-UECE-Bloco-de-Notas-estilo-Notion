@@ -1,40 +1,34 @@
 <script>
-  import Nav from './components/Nav.svelte'
-	import Home from "./components/Home.svelte";
-	import Login from './components/Login.svelte'
-
-	import { auth } from './firebase'
 	
-	let user = false
-	console.log(user)
+	import Nav from './components/Nav.svelte'
+	import Documents from './components/Documents.svelte'
+	import Login from './components/Login.svelte'
+  import Loading from './components/Loading.svelte';
+	import { auth } from './firebase'
 
-	//esta função dispara sempre que o estado de login muda
-	auth.onAuthStateChanged(function(usr){	
-		if(usr){
-			console.log('user signed in: '+usr.displayName)
-			user = true
+	let loged
+
+	auth.onAuthStateChanged((result) => {
+	if(result){
+			loged = true
+			console.log('Observer: User signed in.')
 		}else{
-			console.log('no user signed in')
-			user = false
+			loged = false
+			console.log('Observer: No user signed in.')
 		}
 	})
-	
+
+
 </script>
 
-<div class="app">
-	{#if user}
-		<Nav />
-		<Home />
-	{:else}
-		<Login />
-	{/if}
-</div>
+{#if loged === true}
+	<Nav />
+	<Documents />
+{:else if loged === false}
+	<Login />
+{:else}
+	<Loading />
+{/if}
 
 <style>
-	.app{
-		display: flex;
-		flex-direction: column;
-		width: 100vw;
-		height: 100vh;
-	}
 </style>
