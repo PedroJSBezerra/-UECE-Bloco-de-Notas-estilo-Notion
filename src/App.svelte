@@ -20,6 +20,10 @@
 
 
 </script>
+<!-- svelte:head Insere uma head personalizada no documento -->
+<svelte:head>
+	<meta name="theme-color" content="#333">
+</svelte:head>
 
 {#if loged === true}
 	<Nav />
