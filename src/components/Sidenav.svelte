@@ -5,24 +5,24 @@
   import { open } from "./stores"
   let user = auth.currentUser;
   let power = 'greenyellow'
-  let side_open = () => {$open = !open}
+  let side_toggle = () => {$open = !open}
 </script>
 
 <div class="{$open ? 'side open':'side'}">
-  <Icon_close ref="close" on:click="{side_open}" />
+  <Icon_close ref="close" on:click="{side_toggle}" />
   <input 
     class="userimgside"
     type="image"
     src={user.photoURL}
     alt="Foto do usuário"
     referrerpolicy="no-referrer"
-    on:click="{side_open}"
+    on:click="{side_toggle}"
   />
   <h4 class="username">{user.displayName}</h4>
   <div class="options">
     <button 
       class="logout" 
-      on:click="{() => auth.signOut().then(side_open).then(power = 'red')}" 
+      on:click="{() => auth.signOut().then(power = 'red').then(side_toggle)}" 
     >
     <Icon_power ref="{power}"/>
     <span>Logout</span>
@@ -34,7 +34,6 @@
   .side {
     display: flex;
     position: fixed;
-    z-index: 1;
     left: -100%;
     top: 0;
     flex-direction: column;
@@ -42,11 +41,15 @@
     height: 100vh;
     align-items: center;
     background: #444;
-    transition: left 0.23s ease-out;
+    transition: left 0.23s cubic-bezier(0.4, 0, 1, 1);
   }
   .side.open {
     left: 0;
-    transition: left 0.3s ease-in;
+    transition: left .28s ease-out;
+  }
+  :global(svg){
+	width: 1.8rem;
+	height: 1.8rem;
   }
   :global([ref="close"]){
     cursor: pointer;
@@ -68,7 +71,7 @@
     flex-direction: column;
   }
   .options> *{
-    margin-top: 5px;
+    margin-top: 1rem;
     padding: 5px;
     border-radius: 5px;
   }
