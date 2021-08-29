@@ -25,14 +25,25 @@
 	<meta name="theme-color" content="#333">
 </svelte:head>
 
-{#if loged === true}
-	<Nav />
-	<Documents />
-{:else if loged === false}
-	<Login />
-{:else}
-	<Loading />
-{/if}
+<div class="app">
+	{#if loged === true}
+		<Nav />
+		<Documents />
+	{:else if loged === false}
+		<Login />
+	{:else}
+		<Loading />
+	{/if}
+</div>
 
 <style>
+	.app{
+		height: 100vh;
+    display: grid;
+    grid-template-columns: 1fr;
+    grid-template-rows: 1fr 10fr;
+		grid-template-areas: 
+		'nav';
+	}
+
 </style>

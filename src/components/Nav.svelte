@@ -19,6 +19,7 @@
     justify-content: space-between;
     padding: 6px;
     background: rgba(255,255,255,.2);
+    grid-area: nav;
   }
   .search{
     display: flex;

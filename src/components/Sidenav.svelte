@@ -5,23 +5,24 @@
   import { open } from "./stores"
   let user = auth.currentUser;
   let power = 'greenyellow'
+  let side_open = () => {$open = !open}
 </script>
 
 <div class="{$open ? 'side open':'side'}">
-  <Icon_close ref="close" on:click="{() => $open = !open}" />
+  <Icon_close ref="close" on:click="{side_open}" />
   <input 
     class="userimgside"
     type="image"
     src={user.photoURL}
     alt="Foto do usuário"
     referrerpolicy="no-referrer"
-    on:click="{() => $open = !open}"
+    on:click="{side_open}"
   />
   <h4 class="username">{user.displayName}</h4>
   <div class="options">
     <button 
       class="logout" 
-      on:click="{() => auth.signOut().then(power = 'red')}" 
+      on:click="{() => auth.signOut().then(side_open).then(power = 'red')}" 
     >
     <Icon_power ref="{power}"/>
     <span>Logout</span>
