@@ -1,12 +1,14 @@
 <script>
+  import Sidenav from "./Sidenav.svelte"
   import Profile from './Profile.svelte'
   import Icon_search from '../assets/icon_search.svelte'
+
 </script>
 
 <nav class="nav">
+  <Sidenav />
   <Profile />
   <div class="search">
-    <input type="text">
     <Icon_search />
   </div>
 </nav>
@@ -15,7 +17,7 @@
     display: flex;
     align-items: center;
     justify-content: space-between;
-    padding: 4px;
+    padding: 6px;
     background: rgba(255,255,255,.2);
   }
   .search{
