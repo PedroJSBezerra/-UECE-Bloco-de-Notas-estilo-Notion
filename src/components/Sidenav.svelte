@@ -8,7 +8,9 @@
 </script>
 
 <div class="{$open ? 'side open':'side'}">
-  <Icon_close ref="close" on:click="{side_toggle}" />
+  <div on:click="{side_toggle}" class="close">
+    <Icon_close />
+  </div>
   <input 
     class="userimgside"
     type="image"
@@ -19,12 +21,9 @@
   />
   <h3 class="username">{user.displayName}</h3>
   <div class="options">
-    <button 
-      class="logout" 
-      on:click="{() => auth.signOut().then(side_toggle)}" 
-    >
-    <Icon_power ref="power"/>
-    <span>Logout</span>
+    <button class="logout" on:click="{() => auth.signOut().then(side_toggle)}">
+      <Icon_power />
+      <span>Logout</span>
     </button>
   </div>
 </div>
@@ -43,21 +42,17 @@
     background: #444;
     transition: left 0.23s cubic-bezier(0.4, 0, 1, 1);
   }
+  .close{
+    align-self: flex-start;
+    display: flex;
+    padding: 5px;
+    margin: 5px;
+    border-radius: 3px;
+    cursor: pointer;
+  }
   .side.open {
     left: 0;
     transition: left .28s ease-out;
-  }
-  :global([ref="power"]){
-    width: 1.8rem;
-    height: 1.8rem;
-  }
-  :global([ref="close"]){
-    width: 1.8rem;
-    height: 1.8rem;
-    cursor: pointer;
-    left: 0;
-    align-self: flex-start;
-    margin: 8px;
   }
    .userimgside{
     width: 140px;
@@ -90,7 +85,7 @@
     border: none;
     cursor: pointer;
   }
-  .logout:hover{
+  .close:hover, .logout:hover{
     background: rgba(255,255,255,.2);
   }
   .logout span {

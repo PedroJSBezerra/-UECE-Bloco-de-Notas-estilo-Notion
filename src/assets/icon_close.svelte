@@ -1,10 +1,7 @@
 <script>
-  export let ref
 </script>
 
 <svg 
-  {ref}
-  on:click 
   width="26" 
   height="26" 
   viewBox="0 0 26 26" 
