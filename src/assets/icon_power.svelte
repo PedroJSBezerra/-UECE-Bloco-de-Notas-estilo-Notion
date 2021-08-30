@@ -2,6 +2,7 @@
   export let ref
 </script>
 <svg 
+  {ref}
   width="24" 
   height="24" 
   viewBox="0 0 24 24" 
@@ -16,9 +17,9 @@
     stroke-linejoin="round"
   />
   <path 
-    class="power"
+    class="animation"
     d="M12 2V12" 
-    stroke="{ref}" 
+    stroke="greenyellow" 
     stroke-width="2" 
     stroke-linecap="round" 
     stroke-linejoin="round"
@@ -26,7 +27,7 @@
 </svg>
 
 <style>
-  .power{
+  .animation{
     animation: onoff 3s ease-out infinite;
   }
   @keyframes onoff{

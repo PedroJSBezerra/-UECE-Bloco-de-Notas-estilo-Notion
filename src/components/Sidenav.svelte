@@ -4,7 +4,6 @@
   import { auth } from "../firebase";
   import { open } from "./stores"
   let user = auth.currentUser;
-  let power = 'greenyellow'
   let side_toggle = () => {$open = !open}
 </script>
 
@@ -18,13 +17,13 @@
     referrerpolicy="no-referrer"
     on:click="{side_toggle}"
   />
-  <h4 class="username">{user.displayName}</h4>
+  <h3 class="username">{user.displayName}</h3>
   <div class="options">
     <button 
       class="logout" 
-      on:click="{() => auth.signOut().then(power = 'red').then(side_toggle)}" 
+      on:click="{() => auth.signOut().then(side_toggle)}" 
     >
-    <Icon_power ref="{power}"/>
+    <Icon_power ref="power"/>
     <span>Logout</span>
     </button>
   </div>
@@ -32,6 +31,7 @@
 
 <style>
   .side {
+    z-index: 1;
     display: flex;
     position: fixed;
     left: -100%;
@@ -47,15 +47,17 @@
     left: 0;
     transition: left .28s ease-out;
   }
-  :global(svg){
-	width: 1.8rem;
-	height: 1.8rem;
+  :global([ref="power"]){
+    width: 1.8rem;
+    height: 1.8rem;
   }
   :global([ref="close"]){
+    width: 1.8rem;
+    height: 1.8rem;
     cursor: pointer;
     left: 0;
     align-self: flex-start;
-    margin: 10px;
+    margin: 8px;
   }
    .userimgside{
     width: 140px;

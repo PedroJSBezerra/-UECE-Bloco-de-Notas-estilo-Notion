@@ -1,7 +1,7 @@
 <script>
 	
 	import Nav from './components/Nav.svelte'
-	import Documents from './components/Documents.svelte'
+	import Document_list from './components/Document_list.svelte'
 	import Login from './components/Login.svelte'
   import Loading from './components/Loading.svelte';
 	import { auth } from './firebase'
@@ -24,16 +24,21 @@
 <svelte:head>
 	<meta name="theme-color" content="#333">
 </svelte:head>
-
-{#if loged === true}
-	<Nav />
-	<Documents />
-{:else if loged === false}
-	<Login />
-{:else}
-	<Loading />
-{/if}
+<div class="app">
+	{#if loged === true}
+		<Nav />
+		<Document_list />
+	{:else if loged === false}
+		<Login />
+	{:else}
+		<Loading />
+	{/if}
+</div>
 
 <style>
-
+	.app{
+		position: fixed;
+		height: 100vh;
+		width: 100vw;
+	}
 </style>
