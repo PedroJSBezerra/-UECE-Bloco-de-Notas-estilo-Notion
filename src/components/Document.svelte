@@ -4,6 +4,7 @@
   import Icon_trash from '../assets/icon_trash.svelte'
   import Icon_share from '../assets/icon_share.svelte'
   import Icon_close from '../assets/icon_close.svelte'
+  import { fade } from 'svelte/transition'
 
   export let document
 
@@ -15,73 +16,53 @@
 </script>
 
 <div class="document">
-  {#if open}
-    <div class="delete">
-      <Icon_trash /> <span>Apagar</span>
-    </div>
-    <div class="share">
-      <Icon_share /> <span>Compartilhar</span>
-    </div>
-    <div on:click={options} class="close">
-      <Icon_close />
-    </div>
-  {:else}
-    <div class="item">
-      <Icon_document />
-      <span class="title">{document.title}</span>
-    </div>
-    <div on:click={options} class="more">
-      <Icon_more />
-    </div>
-  {/if}
+  <div class="item_overlay">
+    {#if open}
+      <div class="options">
+        <div class="icon"><Icon_trash /></div>
+        <div class="icon"><Icon_share /></div>
+      </div>
+    {:else}
+      <div class="item">
+        <div class="icon"><Icon_document /></div>
+        <span class="title">{document.title}</span>
+      </div>
+    {/if}
+  </div>
+  <div on:click="{options}" class="toggle">
+    {#if open}
+      <div class="icon"><Icon_close /></div>
+    {:else}
+      <div class="icon"><Icon_more /></div>
+    {/if}
+  </div>
 </div>
 
 <style>
   .document{
-    flex: 1;
-    position: relative;
-    width: 100%;
-    height: 3rem;
-    margin: 3px 0;
-    border-radius: 3px;
-    overflow: hidden;
-    text-align: left;
-    color: inherit;
+    border-radius: 4px;
+    margin: 6px 0;
     display: flex;
-    align-items: center;
-    justify-content: space-between;
     background: rgba(255,255,255,.2);
   }
-  .item, .more{
+  .icon{
+    margin: .6rem .6rem;
     display: flex;
     align-items: center;
-    padding: 5px;
-    border-radius: 3px;
-    height: 100%;
-    cursor: pointer;
   }
-  .close, .more{
-    width: 3rem;
-    justify-content: center;
+  .item_overlay{
+    flex: 1;
+    display: flex;
   }
-  .item{
+  .item, .options{
+    flex: 1;
+    display: flex;
+    align-items: center;
+  }
+  .title{
     flex: 1;
   }
-  .item span{
-    margin-left: 5px;
-  }
-  .item:hover, .more:hover, .delete:hover, .share:hover, .close:hover {
-    background: rgba(255,255,255,.4);
-  }
-  .delete, .share, .close{
-    display: flex;
-    align-items: center;
-    padding: 5px;
-    border-radius: 3px;
-    height: 100%;
-    cursor: pointer;
-  }
-  .delete span, .share span{
-    margin-left: 5px;
+  :where(.item, .toggle, .options):hover{
+    background: rgba(255,255,255,.1);
   }
 </style>

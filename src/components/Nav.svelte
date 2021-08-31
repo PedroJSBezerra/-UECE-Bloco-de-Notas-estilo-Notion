@@ -1,5 +1,4 @@
 <script>
-  import { auth } from "../firebase";
   import { open } from './stores'
   import Sidenav from "./Sidenav.svelte"
   import Icon_search from '../assets/icon_search.svelte'

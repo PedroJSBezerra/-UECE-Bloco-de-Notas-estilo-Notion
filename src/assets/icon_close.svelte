@@ -1,17 +1,4 @@
-<script>
-</script>
-
-<svg 
-  width="26" 
-  height="26" 
-  viewBox="0 0 26 26" 
-  fill="none" 
-  xmlns="http://www.w3.org/2000/svg"
->
-  <path d="M5.6875 5.6875L20.3125 20.3125" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
-  <path d="M5.6875 20.3125L20.3125 5.6875" stroke="white" stroke-width="2" stroke-linecap="round" stroke-linejoin="round"/>
+<svg on:click width="25" height="25" viewBox="0 0 25 25" fill="none" xmlns="http://www.w3.org/2000/svg">
+<rect x="2" y="3.55554" width="2.19989" height="27.4986" rx="1.09994" transform="rotate(-45 2 3.55554)" fill="white"/>
+<rect x="21.4445" y="2" width="2.19989" height="27.4986" rx="1.09994" transform="rotate(45 21.4445 2)" fill="white"/>
 </svg>
-
-
-<style>
-</style>
