@@ -1,9 +1,10 @@
 <script>
   import {auth, googleProvider} from '../firebase'
   import Button from '../assets/btn_google_dark_normal_ios.svelte'
+
   const login = () => {
 		auth.signInWithPopup(googleProvider)
-    // usa a resposta do loging se precisar
+    // usa a resposta do login se precisar
     // .then((result) => {
 		// 	user = {
 		// 		uuid: result.user.uid,

@@ -47,7 +47,8 @@
     display: flex;
     overflow: hidden;
     flex-wrap: wrap;
-    background:rgba(255, 255, 255, 0.2)
+    background:rgba(255, 255, 255, 0.2);
+    cursor: pointer;
   }
   .options{
     width: 100%;
@@ -56,11 +57,6 @@
     position: relative;
     justify-content: center;
   }
-  /* .item,
-  .toggle,
-  .options{
-    background: #555;
-  } */
   .icon {
     margin: .6rem;
     display: flex;
@@ -74,7 +70,7 @@
     background: rgba(255, 255, 255, 0.4);
   }
   span{
-    margin: auto .6rem;
+    margin: auto 0;
   }
   .item,
   .delete,

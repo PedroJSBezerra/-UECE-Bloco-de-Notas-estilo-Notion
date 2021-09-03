@@ -1,27 +1,19 @@
 <script>
-  import { open } from './stores'
-  import Sidenav from "./Sidenav.svelte"
-  import Icon_search from '../assets/icon_search.svelte'
-  import Icon_account from '../assets/icon_account.svelte'
+  import Button_burguer from './Button_burguer.svelte'
+  import Overlay_side from './Overlay_side.svelte'
 
+  let open = false
 </script>
 
 <nav class="nav">
-  <Sidenav />
-  <Icon_account on:click="{() => open.update(open => !open)}"/>
-  <div class="search">
-    <Icon_search />
-  </div>
+  <Button_burguer {open} on:click="{() => open = !open}"/>
+  {#if open}
+    <Overlay_side />
+  {/if}
 </nav>
 <style>
   .nav{
-    display: flex;
-    align-items: center;
-    justify-content: space-between;
-    padding: 6px;
-    background: rgba(255,255,255,.2);
-  }
-  .search{
+    background: #555;
     display: flex;
     align-items: center;
   }
