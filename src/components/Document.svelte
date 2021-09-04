@@ -1,13 +1,14 @@
 <script>
+  import Button_more from "./Button_more.svelte"
+
   import Icon_document from "../assets/icon_document.svelte";
-  import Icon_more from "../assets/icon_more.svelte";
   import Icon_trash from "../assets/icon_trash.svelte";
   import Icon_share from "../assets/icon_share.svelte";
-  import Icon_close from "../assets/icon_close.svelte";
+  
   import {slide} from 'svelte/transition'
 
   export let document;
-  let open = false;
+  export let open = false;
 </script>
 
 <div class="document">
@@ -17,13 +18,7 @@
       <span class="title">{document.title}</span>
     </div>
 
-    <div on:click={() => (open = !open)} class="toggle">
-      {#if open}
-        <div class="icon"><Icon_close /></div>
-      {:else}
-        <div class="icon"><Icon_more /></div>
-      {/if}
-    </div>
+    <Button_more {open} on:click={() => (open = !open)} />
 
     {#if open}
       <div class="options" transition:slide={{duration:250}}>
@@ -78,7 +73,7 @@
     flex: 1;
     display: flex;
   }
-  :where(.item, .toggle, .delete, .share):hover {
+  :where(.item, .delete, .share):hover {
     background: rgba(255, 255, 255, 0.1);
   }
 </style>

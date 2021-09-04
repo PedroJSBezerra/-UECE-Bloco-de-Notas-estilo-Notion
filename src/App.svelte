@@ -22,7 +22,7 @@
 </script>
 <!-- svelte:head Insere uma head personalizada no documento -->
 <svelte:head>
-	<meta name="theme-color" content="#333">
+	<meta name="theme-color" content="#555">
 </svelte:head>
 <div class="app">
 	{#if loged === true}

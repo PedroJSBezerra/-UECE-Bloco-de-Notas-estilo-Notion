@@ -10,7 +10,7 @@
 
 </script>
 
-<div class="side" transition:slide>
+<div class="side" transition:slide={{duration:300}}>
   <div class="profile">
     <img 
       on:error={srcError}
