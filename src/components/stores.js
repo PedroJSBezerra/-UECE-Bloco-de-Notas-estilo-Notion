@@ -1,6 +1,6 @@
 import { writable } from 'svelte/store'
 
-export const open = writable(false)
+export const visible = writable(false)
 
 
 export const add = () => {

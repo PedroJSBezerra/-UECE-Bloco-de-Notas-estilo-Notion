@@ -1,19 +1,24 @@
 <script>
   import Button_add_document from "./Button_add_document.svelte"
   import Document from './Document.svelte'
-  import {list, add} from './stores'
+  import {list, visible} from './stores'
+  import Overlay_document from './Overlay_document.svelte'
 
 </script>
 
-<div class="scroll_area">
-  <Button_add_document on:click="{add}" />
+{#if $visible}
+    <Overlay_document />
+{/if}
+
+<div class="document_list_scroll">
+  <Button_add_document on:click="{() => visible.update(v => v = !v)}" />
   {#each list as document}
     <Document {document}/>
   {/each}
 </div>
 
 <style>
-  .scroll_area{
+  .document_list_scroll{
     height: 95vh;
     padding: 0 20px;
     overflow-y: auto;
