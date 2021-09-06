@@ -8,6 +8,34 @@
   import Icon_minus from '../assets/Icon_minus.svelte'
   import { fly } from 'svelte/transition'
 
+  let title = ''
+  let description = ''
+  let geolocation_list = [
+    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
+    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
+    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
+    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
+    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
+  ]
+  let geolocation
+
+  const getCurrentPosition = () => {
+    navigator.geolocation.getCurrentPosition( position => {
+      const {latitude, longitude} = position.coords
+      geolocation = { latitude, longitude}
+    })
+  }
+
+  const saveDocument = () => {
+    console.log(title)
+    console.log(description)
+    console.log(geolocation_list)
+    console.log(geolocation)
+    if(!geolocation){
+      console.log('Voçe esqueceu de adicionar a geolocalização!')
+    }
+  }
+
 </script>
 
 <div class="overlay_document" transition:fly={{y:600 ,duration:250}}>
@@ -26,7 +54,7 @@
       </div>
     </div>
 
-    <div class="done">
+    <div class="done" on:click="{saveDocument}">
       <div class="icon">
         <Icon_done />
       </div>
@@ -36,15 +64,15 @@
 
   <div class="docscroll">
     
-    <h3 contenteditable class="title">000001 nome e sobrenome do cliente</h3>
+    <h3 contenteditable class="title" bind:innerHTML="{title}"></h3>
     
-    <div contenteditable class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque fugit sapiente necessitatibus dignissimos minus sed dolore harum aspernatur labore eveniet magni ducimus tempora, perspiciatis vel sint numquam blanditiis quibusdam ipsa! Rerum ea blanditiis, fugiat officia fuga possimus recusandae velit aliquam. Incidunt magni provident nemo expedita officiis cupiditate, voluptatibus beatae iure deserunt maiores quod veniam perspiciatis architecto? Dolor esse quisquam quidem?</div>
+    <div contenteditable class="description" bind:innerHTML="{description}"></div>
     
     <div class="geolocation">
 
       <h3>Geolocalização</h3>
       
-      <div class="addlocation">
+      <div class="addlocation" on:click="{getCurrentPosition}">
         <div class="icon">
           <Icon_mappin />
         </div>
@@ -52,20 +80,15 @@
       </div>
 
       <ul class="location_list">
-        <li>
-          <div class="navigate">
-            <div class="icon"><Icon_navigate /></div>
-            <span>23/06/21 as 09:56</span>
-          </div>
-          <div class="icon remove"><Icon_minus /></div>
-        </li>
-        <li>
-          <div class="navigate">
-            <div class="icon"><Icon_navigate /></div>
-            <span>23/06/21 as 09:56</span>
-          </div>
-          <div class="icon remove"><Icon_minus /></div>
-        </li>
+        {#each geolocation_list as item}
+          <li>
+            <div class="navigate">
+              <div class="icon"><Icon_navigate /></div>
+              <span>{item.date} as {item.time}</span>
+            </div>
+            <div class="icon remove"><Icon_minus /></div>
+          </li>
+        {/each}
       </ul>
     
     </div>
