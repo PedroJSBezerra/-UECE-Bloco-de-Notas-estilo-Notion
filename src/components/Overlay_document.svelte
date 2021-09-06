@@ -10,19 +10,30 @@
 
   let title = ''
   let description = ''
-  let geolocation_list = [
-    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
-    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
-    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
-    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
-    {date: '23/06/21', time: '09:56', coordinates: '-41.0020202,-4.0255156'},
-  ]
-  let geolocation
+  let geolocation_list = []
 
   const getCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition( position => {
       const {latitude, longitude} = position.coords
-      geolocation = { latitude, longitude}
+      
+      let date = new Date(position.timestamp)
+      let day = date.getDate()
+      let month = date.getMonth()+1
+      let year = date.getFullYear()
+      let hour = date.getHours()
+      let minute = date.getMinutes()
+      let second = date.getSeconds()
+      
+      let geolocation = `${latitude} ${longitude}`
+      let geolocation_date = `${day}/${month}/${year}`
+      let geolocation_time = `${hour}:${minute}:${second}`
+
+      let geoobj = {
+        date: geolocation_date,
+        time: geolocation_time,
+        coordinates: geolocation,
+      }
+      geolocation_list = geolocation_list.concat(geoobj)
     })
   }
 
@@ -30,10 +41,6 @@
     console.log(title)
     console.log(description)
     console.log(geolocation_list)
-    console.log(geolocation)
-    if(!geolocation){
-      console.log('Voçe esqueceu de adicionar a geolocalização!')
-    }
   }
 
 </script>
@@ -80,13 +87,13 @@
       </div>
 
       <ul class="location_list">
-        {#each geolocation_list as item}
+        {#each geolocation_list as item, index}
           <li>
             <div class="navigate">
               <div class="icon"><Icon_navigate /></div>
               <span>{item.date} as {item.time}</span>
             </div>
-            <div class="icon remove"><Icon_minus /></div>
+            <div class="icon remove" on:click="{() => console.log(index)}"><Icon_minus /></div>
           </li>
         {/each}
       </ul>
