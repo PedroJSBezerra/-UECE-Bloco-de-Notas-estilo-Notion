@@ -14,4 +14,6 @@ export const list = [
   {title: '000003 Lula Molusco'},
   {title: '000004 Sr. Sirigueijo'},
   {title: '000005 Garry'},
+  {title: '000005 Sandy'},
+  {title: '000005 Perola'},
 ]

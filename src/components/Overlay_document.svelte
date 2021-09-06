@@ -4,6 +4,8 @@
   import Icon_delete from '../assets/icon_trash.svelte'
   import Icon_done from '../assets/Icon_checked.svelte'
   import Icon_mappin from '../assets/Icon_mappin.svelte'
+  import Icon_navigate from '../assets/Icon_navigate.svelte'
+  import Icon_minus from '../assets/Icon_minus.svelte'
   import { fly } from 'svelte/transition'
 
 </script>
@@ -39,13 +41,33 @@
     <div contenteditable class="description">Lorem ipsum dolor sit, amet consectetur adipisicing elit. Neque fugit sapiente necessitatibus dignissimos minus sed dolore harum aspernatur labore eveniet magni ducimus tempora, perspiciatis vel sint numquam blanditiis quibusdam ipsa! Rerum ea blanditiis, fugiat officia fuga possimus recusandae velit aliquam. Incidunt magni provident nemo expedita officiis cupiditate, voluptatibus beatae iure deserunt maiores quod veniam perspiciatis architecto? Dolor esse quisquam quidem?</div>
     
     <div class="geolocation">
+
       <h3>Geolocalização</h3>
+      
       <div class="addlocation">
         <div class="icon">
           <Icon_mappin />
         </div>
-        <span>Adicionar Geolocalização</span>
+        <span>Adicionar</span>
       </div>
+
+      <ul class="location_list">
+        <li>
+          <div class="navigate">
+            <div class="icon"><Icon_navigate /></div>
+            <span>23/06/21 as 09:56</span>
+          </div>
+          <div class="icon remove"><Icon_minus /></div>
+        </li>
+        <li>
+          <div class="navigate">
+            <div class="icon"><Icon_navigate /></div>
+            <span>23/06/21 as 09:56</span>
+          </div>
+          <div class="icon remove"><Icon_minus /></div>
+        </li>
+      </ul>
+    
     </div>
   
   </div>
@@ -81,10 +103,8 @@
     display: inline-block;
   }
   .docscroll{
-    display: flex;
-    flex-direction: column;
     overflow-y: auto;
-    padding: 0 16px;
+    padding: 0 8px;
   }
   .docscroll > *{
     margin-top: 16px;
@@ -94,23 +114,58 @@
     overflow: hidden;
   }
   .geolocation{
-    padding: 0;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
   }
   .geolocation h3{
-    text-align: center;
     padding: 10px;
   }
   .addlocation{
     display: flex;
-    padding: 16px;
+    padding: 8px;
     flex-direction: column;
     align-items: center;
+    border-radius: 6px;
+    background: #444;
   }
   .addlocation:hover{
     background: rgba(255,255,255,.2);
     cursor: pointer;
   }
-  .addlocation .icon{
-    padding: 16px;
+  .icon{
+    padding: 8px;
+  }
+  .addlocation span{
+    text-align: center;
+  }
+  .location_list{
+    display: flex;
+    flex-direction: column;
+    width: 100%;
+    padding: 0 16px;
+    list-style-type: none;
+  }
+  .location_list li{
+    margin-top: 16px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    background: #444;
+    border-radius: 6px;
+    overflow: hidden;
+  }
+  .navigate{
+    display: flex;
+    align-items: center;
+    flex: 1;
+  }
+  .navigate span{
+    text-align: center;
+    width: 100%;
+  }
+  :where(.navigate, .icon.remove):hover{
+    background: rgba(255,255,255,.2);
+    cursor: pointer;
   }
 </style>
