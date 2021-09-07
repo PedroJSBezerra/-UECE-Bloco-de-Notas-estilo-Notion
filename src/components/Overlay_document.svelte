@@ -7,6 +7,7 @@
   import Icon_navigate from '../assets/Icon_navigate.svelte'
   import Icon_minus from '../assets/Icon_minus.svelte'
   import { fly } from 'svelte/transition'
+  import {db, auth} from '../firebase'
 
   let title = ''
   let description = ''
@@ -38,16 +39,32 @@
     })
   }
 
-  const saveDocument = () => {
-    console.log(title)
-    console.log(description)
-    console.log(geolocation_list)
-  }
-
   const removeLocation = (index) => {
     let list = geolocation_list
     geolocation_list = [...list.slice(0,index),...list.slice(index+1)]
     console.log(geolocation_list)
+  }
+
+  const saveDocument = () => {
+    
+    const docObj = {
+      title,
+      description,
+      geolocation_list,
+    }
+
+    const userRef = db.collection("users").doc(auth.currentUser.uid)// current user doc
+    const documentsRef = userRef.collection("documents").doc()
+
+    
+    documentsRef.set(docObj) //Data
+    .then(() => { //error handling
+      console.log("Document successfully written!");
+    })
+    .catch((error) => {
+      console.error("Error writing document: ", error);
+    });
+  
   }
 
 </script>
