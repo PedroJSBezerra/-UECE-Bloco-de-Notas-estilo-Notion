@@ -12,6 +12,7 @@
   let description = ''
   let geolocation_list = []
 
+
   const getCurrentPosition = () => {
     navigator.geolocation.getCurrentPosition( position => {
       const {latitude, longitude} = position.coords
@@ -40,6 +41,12 @@
   const saveDocument = () => {
     console.log(title)
     console.log(description)
+    console.log(geolocation_list)
+  }
+
+  const removeLocation = (index) => {
+    let list = geolocation_list
+    geolocation_list = [...list.slice(0,index),...list.slice(index+1)]
     console.log(geolocation_list)
   }
 
@@ -93,7 +100,9 @@
               <div class="icon"><Icon_navigate /></div>
               <span>{item.date} as {item.time}</span>
             </div>
-            <div class="icon remove" on:click="{() => console.log(index)}"><Icon_minus /></div>
+            <div class="icon remove" on:click="{() => removeLocation(index)}">
+              <Icon_minus />
+            </div>
           </li>
         {/each}
       </ul>
