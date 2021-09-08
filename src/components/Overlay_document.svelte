@@ -1,5 +1,5 @@
 <script>
-  import {visible} from './stores'
+  import {visible} from '../stores'
   import Icon_close from '../assets/icon_close.svelte'
   import Icon_delete from '../assets/icon_trash.svelte'
   import Icon_done from '../assets/Icon_checked.svelte'
@@ -53,11 +53,13 @@
       geolocation_list,
     }
 
-    const userRef = db.collection("users").doc(auth.currentUser.uid)// current user doc
-    const documentsRef = userRef.collection("documents").doc()
-
     
-    documentsRef.set(docObj) //Data
+    db
+    .collection('users')
+    .doc(auth.currentUser.uid)
+    .collection('documents')
+    .doc()
+    .set(docObj)
     .then(() => { //error handling
       console.log("Document successfully written!");
     })
