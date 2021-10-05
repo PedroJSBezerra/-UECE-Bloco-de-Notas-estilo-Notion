@@ -2,38 +2,29 @@
   export let open
 </script>
 
-<div 
-  on:click 
-  class={open? "burguer open" : "burguer"}
->
-  <span></span>
-  <span></span>
-  <span></span>
-</div>
+<button class="navtoggle {open? 'open': ''}" on:click>
+  <span></span><span></span><span></span>
+</button>
 
 <style>
-
-  .burguer{
+  
+  button{
+    z-index: 1;
+    position: absolute;
+    background: rgba(255,255,255,.0);
+    border: none;
     cursor: pointer;
-    z-index: 2;
     display: flex;
     width: 50px;
     height: 50px;
     justify-content: center;
     align-items: center;
     transition: all .3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
-
   }
-  .burguer:hover{
+  /* button:hover{
     background: rgba(255,255,255,.1);
-  }
-  .burguer.open{
-    margin: 20px;
-    border-radius: 50%;
-    width: 60px;
-    height: 60px;
-  }
-  .burguer span{
+  } */
+  button span{
     display: block;
     position: absolute;
     width: 30px;
@@ -42,21 +33,20 @@
     border-radius: 2px;
     transition: all .3s ease-in-out;
   }
-  .burguer span:nth-child(1){
+  button span:nth-child(1){
     transform: translateY(-8px);
   }
-  .burguer span:nth-child(3){
+  button span:nth-child(3){
     transform: translateY(8px);
   }
-  .burguer.open span:nth-child(1){
+  button.open span:nth-child(1){
     transform: translateY(0) rotateZ(45deg);
-
   }
-  .burguer.open span:nth-child(2){
+  button.open span:nth-child(3){
     transform: translateY(0) rotateZ(-45deg);
   }
-  .burguer.open span:nth-child(3){
-    transform: translateY(24px);
+  button.open span:nth-child(2){
+    transform: translateX(24px);
     opacity: 0;
   }
 </style>

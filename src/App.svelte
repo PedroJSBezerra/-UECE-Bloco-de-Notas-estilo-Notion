@@ -1,46 +1,42 @@
 <script>
-	
-	import Nav from './components/Nav.svelte'
-	import Document_list from './components/Document_list.svelte'
-	import Login from './components/Login.svelte'
-  import Loading from './components/Loading.svelte';
-	import { auth } from './firebase'
+	import './lib/firebase'
+	import Login from './components/Login/_index.svelte'
+	import Main from './components/_Main/_index.svelte'
+	import { onAuthStateChanged, getAuth  } from 'firebase/auth'
 
-	let loged
+	let loged = 'loading'
 
-	auth.onAuthStateChanged((result) => {
-	if(result){
-			loged = true
-			console.log('Observer: User signed in.')
+	onAuthStateChanged(getAuth(), (user) => {
+		if(user){
+			console.log('Observer: signed in '+ user.displayName)
+			loged = 'loged'
 		}else{
-			loged = false
-			console.log('Observer: No user signed in.')
+			console.log('Observer: not signed.')
+			loged = 'logedOut'
 		}
 	})
 
-
 </script>
 
-<!-- svelte:head Insere uma head personalizada no documento -->
-<svelte:head>
-	<meta name="theme-color" content="#555">
-</svelte:head>
-
 <div class="app">
-	{#if loged === true}
-		<Nav />
-		<Document_list />
-	{:else if loged === false}
+	{#if loged == 'loged'}
+		<Main />
+	{:else if loged == 'logedOut'}
 		<Login />
-	{:else}
-		<Loading />
+	{:else if loged == 'loading'}
+		<h1 class="loading">Loading user data...</h1>
 	{/if}
 </div>
 
 <style>
 	.app{
-		position: fixed;
-		height: 100vh;
 		width: 100vw;
+		height: 100vh;
+	}
+	.loading{
+    position: fixed;
+    top: 50%;
+    left: 50%;
+    transform: translate(-50%, -50%);
 	}
 </style>
