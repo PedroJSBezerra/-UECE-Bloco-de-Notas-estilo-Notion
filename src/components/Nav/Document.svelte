@@ -14,7 +14,7 @@
     options = !options
   }
   function showdoc(doc){
-    currentDoc.set(doc.data)
+    currentDoc.set(doc)
     open.set(!$open)
   }
   

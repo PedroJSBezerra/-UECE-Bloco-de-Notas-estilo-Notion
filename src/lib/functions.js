@@ -18,7 +18,7 @@ initializeApp({
 // ======== EXPORT DATA ==========
 export let docList = writable([])
 export const open = writable(false)
-export const currentDoc = writable({title: "Escolha um documento na lista", data: ""})
+export const currentDoc = writable({id: '', data:{title: "Escolha um documento na lista", data: ""}})
 export const loged = writable('loading')
 //======= AUTH OBSERVER ===============
 onAuthStateChanged(getAuth(), (user) => {
@@ -66,6 +66,7 @@ export const updateDocument = (docId,documentObject) => {
   updateDoc(doc(db, uidCollection, docId), documentObject)
 }
 export const deleteDocument = (docId) => {
+  let db = getFirestore()
   let uidCollection = getAuth().currentUser.uid
   deleteDoc(doc(db, uidCollection, docId))
 }

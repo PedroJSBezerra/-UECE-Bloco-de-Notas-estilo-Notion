@@ -4,7 +4,6 @@
   import {clickOutside, deleteDocument} from '../../lib/functions'
 
   export let doc
-  console.log(doc)
   
 </script>
 
