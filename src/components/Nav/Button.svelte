@@ -1,15 +1,15 @@
 <script>
-  export let open
+  import { open } from '../../lib/functions'
 </script>
 
-<button class="navtoggle {open? 'open': ''}" on:click>
+<button class="navtoggle {$open? 'open': ''}" on:click>
   <span></span><span></span><span></span>
 </button>
 
 <style>
   
   button{
-    z-index: 1;
+    z-index: 999;
     position: absolute;
     background: rgba(255,255,255,.0);
     border: none;
@@ -21,9 +21,6 @@
     align-items: center;
     transition: all .3s cubic-bezier(0.68, -0.55, 0.27, 1.55);
   }
-  /* button:hover{
-    background: rgba(255,255,255,.1);
-  } */
   button span{
     display: block;
     position: absolute;

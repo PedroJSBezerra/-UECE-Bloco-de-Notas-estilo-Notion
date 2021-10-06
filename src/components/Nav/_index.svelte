@@ -1,30 +1,31 @@
 <script>
   import Button from './Button.svelte'
   import Profile from './Profile.svelte'
-  import Documents from '../Documents/_index.svelte'
+  import DocList from './DocList.svelte'
   import { fly } from 'svelte/transition'
-
-  let open = false
+  import { open } from '../../lib/functions'
 </script>
 
-<Button open={open} on:click={() => open = !open} />
+<Button on:click={() => open.set(!$open)} />
   
-{#if open}
+{#if $open}
   <div
    class="nav"
    in:fly={{x: -200}}
    out:fly={{x: -200}}
   >
-  <Profile open={open} />
-  <Documents />
+  <Profile />
+  <DocList />
   </div>
 {/if}
 
 <style>
   .nav{
+    z-index: 998;
     width: 100%;
     height: 100%;
-    background: rgba(255,255,255,.1);
+    background: #555;
     overflow: hidden;
+    position: relative;
   }
 </style>

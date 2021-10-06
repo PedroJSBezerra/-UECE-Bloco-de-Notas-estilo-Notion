@@ -3,23 +3,37 @@
   import Icon_document from '../../assets/icon_document.svelte'
   import Icon_more from '../../assets/icon_more.svelte'
   import RemoveDoc from './RemoveDoc.svelte'
+  import { open } from '../../lib/functions'
+  import {currentDoc} from '../../lib/functions'
 
   export let doc
   export let index
   let options = false
+
+  function showoptions(){
+    options = !options
+  }
+  function showdoc(doc){
+    currentDoc.set(doc.data)
+    open.set(!$open)
+  }
+  
+  function handleClickOutside(event){
+    options = false
+  }
 </script>
 
-<li in:fly={{y: 200, duration: 300+index*400}}>
-  {#if  options}
-    <RemoveDoc {doc} {index} />
+<li in:fly={{y: 300, duration: 100*index+150}}>
+  {#if options}
+    <RemoveDoc on:click_outside={handleClickOutside} {doc} />
+  {:else}
+    <div class="icon"><Icon_document /></div>
+    <h3 on:click="{showdoc(doc)}">{doc.data.title}</h3>
   {/if}
-  <div class="icon"><Icon_document /></div>
-  <h3>{doc.title}</h3>
-  <div class="icon" on:click={() => options = !options}><Icon_more /></div>
+  <div class="icon" on:click={showoptions}><Icon_more /></div>
 </li>
 
 <style>
-
   li{
     display: flex;
     align-items: center;
@@ -40,5 +54,7 @@
   .icon{
     padding: 6px;
     display: flex;
+    position: relative;
+    background: #484848;
   }
 </style>

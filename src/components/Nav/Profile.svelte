@@ -1,14 +1,14 @@
 <script>
   import { getAuth } from 'firebase/auth'
   import { fly } from 'svelte/transition'
+  import { open } from '../../lib/functions'
   
   let currentUser = getAuth().currentUser
   let userName = currentUser.displayName
   let photoUrl = currentUser.photoURL
 
-  export let open
 </script>
-{#key open}
+{#key $open}
   <div 
     in:fly={{y: -100, duration: 700}} 
     class="profile"

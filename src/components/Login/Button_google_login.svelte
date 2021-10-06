@@ -1,20 +1,6 @@
 <script>
 	import Icon_google_login from './Icon_google_button.svelte'
-	import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
-
-	const login = () => {
-		const auth = getAuth()
-		const provider = new GoogleAuthProvider()
-
-		signInWithPopup(auth, provider)
-			.then((result) => {
-				console.log("Loged-in with user: "+ result.user.displayName)
-			}).catch((error) => {
-				const errorMessage = error.message
-				console.log(errorMessage)
-			})
-	}
-
+	import {login} from '../../lib/functions'
 </script>
 
 <button on:click="{login}">
