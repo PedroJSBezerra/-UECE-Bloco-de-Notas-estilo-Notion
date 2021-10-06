@@ -1,10 +1,11 @@
 <script>
   import Icon_checked from '../../assets/Icon_checked.svelte'
   import {currentDoc, updateDocument} from '../../lib/functions'
-  
+
+  export let w
 </script>
 
-<div class="currentdoc">
+<div class="currentdoc{w > 700? ' desktop':''}">
   {#if $currentDoc.id != ''}
     <div class="save" on:click="{() => updateDocument($currentDoc.id, $currentDoc.data)}">
       <div class="icon"><Icon_checked /></div>
@@ -31,10 +32,16 @@
     display: flex;
     justify-content: flex-end;
   }
+  .icon{
+    cursor: pointer;
+  }
   h3{
     margin-top: 2rem;
   }
   p{
     margin-top: 2rem;
+  }
+  .desktop{
+    position: relative;
   }
 </style>

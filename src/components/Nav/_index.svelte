@@ -4,18 +4,22 @@
   import DocList from './DocList.svelte'
   import { fly } from 'svelte/transition'
   import { open } from '../../lib/functions'
+
+  export let w
 </script>
 
-<Button on:click={() => open.set(!$open)} />
+{#if w < 700}
+  <Button on:click={() => open.set(!$open)} />
+{/if}
   
 {#if $open}
   <div
-   class="nav"
+   class="nav{w > 700? ' desktop':''}"
    in:fly={{x: -200}}
    out:fly={{x: -200}}
   >
   <Profile />
-  <DocList />
+  <DocList {w}/>
   </div>
 {/if}
 
@@ -27,5 +31,8 @@
     background: #555;
     overflow: hidden;
     position: relative;
+  }
+  .desktop{
+    width: 35%;
   }
 </style>

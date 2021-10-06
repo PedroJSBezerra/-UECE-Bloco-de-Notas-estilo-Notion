@@ -2,7 +2,7 @@
   import { open } from '../../lib/functions'
 </script>
 
-<button class="navtoggle {$open? 'open': ''}" on:click>
+<button class="navtoggle{$open? ' open': ''}" on:click>
   <span></span><span></span><span></span>
 </button>
 

@@ -21,6 +21,8 @@
   function handleClickOutside(event){
     options = false
   }
+
+  export let w
 </script>
 
 <li in:fly={{y: 300, duration: 100*index+150}}>
@@ -28,7 +30,11 @@
     <RemoveDoc on:click_outside={handleClickOutside} {doc} />
   {:else}
     <div class="icon"><Icon_document /></div>
-    <h3 on:click="{showdoc(doc)}">{doc.data.title}</h3>
+    {#if w < 700}
+      <h3 on:click="{showdoc(doc)}">{doc.data.title}</h3>
+    {:else}
+      <h3 on:click="{currentDoc.set(doc)}">{doc.data.title}</h3>
+    {/if}
   {/if}
   <div class="icon" on:click={showoptions}><Icon_more /></div>
 </li>
@@ -55,6 +61,5 @@
     padding: 6px;
     display: flex;
     position: relative;
-    background: #484848;
   }
 </style>

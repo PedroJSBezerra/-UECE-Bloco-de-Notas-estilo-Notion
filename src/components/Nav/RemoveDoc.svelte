@@ -24,7 +24,6 @@
     display: flex;
     width: 100%;
     align-items: center;
-    background: #5b5b5b;
     justify-content: center;
   }
   .options h3{

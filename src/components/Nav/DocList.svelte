@@ -20,12 +20,13 @@
     docList.set(documentList)
   })
 
+  export let w
 </script>
 
 <div class="documents">
   <ul>
     {#each $docList as doc, index}
-      <Document {doc} {index}/>
+      <Document {w} {doc} {index}/>
     {/each}
   </ul>
   <AddDoc />
