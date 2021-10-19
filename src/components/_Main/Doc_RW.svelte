@@ -7,7 +7,7 @@
 
 <div class="currentdoc{w > 700? ' desktop':''}">
   {#if $currentDoc.id != ''}
-    <div class="save" on:click="{() => updateDocument($currentDoc.id, $currentDoc.data)}">
+    <div class="save" on:click="{() => updateDocument($currentDoc.id, $currentDoc)}">
       <div class="icon"><Icon_checked /></div>
     </div>
     <h3 contenteditable="true" bind:innerHTML="{$currentDoc.data.title}"></h3>

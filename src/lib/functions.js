@@ -3,7 +3,8 @@ import { initializeApp } from "firebase/app";
 import { writable } from 'svelte/store'
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, 
+import { 
+  getFirestore, 
   onSnapshot, 
   doc, 
   addDoc, 
@@ -28,11 +29,11 @@ export const open = writable(false)
 export const currentDoc = writable(
   {
     id: '',
-    geolocation: [], 
     data:{
       title: "Escolha um documento na lista", 
-      data: ""
-    }
+      data: "",
+    },
+    geolocation: [], 
   }
 )
 export const loged = writable('loading')
@@ -57,8 +58,8 @@ export const getDocs = () => {
     querySnapshot.forEach((doc) => {
       let docobj = {
         id:doc.id,
-        geolocation: [],
-        data: doc.data()
+        data: doc.data(),
+        geolocation: doc.geolocation,
       }
       documentList.push(docobj)
     })
@@ -78,7 +79,12 @@ export const login = () => {
       console.log(errorMessage)
     })
 }
-export const addDocument = (documentObject) => {
+export const addDocument = () => {
+  let documentObject = {
+    title: 'Novo documento',
+    data: '',
+    geolocation: []
+  }
   const db = getFirestore()
   const auth = getAuth()
   let uidCollection = auth.currentUser.uid
@@ -113,6 +119,26 @@ export const clickOutside = (node) => {
     }
   }
 }
-export const addLocation = () => {
-
+export const addLocation = (currentDoc) => {
+  navigator.geolocation.getCurrentPosition( position => {
+    const {latitude, longitude} = position.coords
+    
+    let date = new Date(position.timestamp)
+    let day = date.getDate()
+    let month = date.getMonth()+1
+    let year = date.getFullYear()
+    let hour = date.getHours()
+    let minute = date.getMinutes()
+    let second = date.getSeconds()
+    
+    let geolocation = `${latitude} ${longitude}`
+    let geolocation_date = `${day}/${month}/${year}`
+    let geolocation_time = `${hour}:${minute}:${second}`
+    let geoobj = {
+      date: geolocation_date,
+      time: geolocation_time,
+      coordinates: geolocation,
+    }
+    currentDoc.geolocation.concat(geoobj)
+  })
 }

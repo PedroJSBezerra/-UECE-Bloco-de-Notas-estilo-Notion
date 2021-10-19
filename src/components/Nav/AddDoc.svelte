@@ -1,14 +1,9 @@
 <script>
   import Icon_document_add from '../../assets/icon_document_add.svelte'
   import { addDocument } from '../../lib/functions'
-  
-  let docObj = {
-    title: 'Novo documento',
-    data: ''
-  }
 
 </script>
-<h3 on:click="{() => addDocument(docObj)}">
+<h3 on:click="{() => addDocument()}">
   <div class="icon"><Icon_document_add /></div>
   <span>Adicionar Documento</span>
 </h3>
