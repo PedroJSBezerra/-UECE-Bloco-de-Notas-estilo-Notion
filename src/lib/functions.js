@@ -24,19 +24,17 @@ initializeApp({
   appId: "1:740351658749:web:9149120ef83c07feb6cc94"
 });
 // ======== EXPORT DATA ==========
-export let docList = writable([])
 export const open = writable(false)
+export const loged = writable('loading')
+export let docList = writable([])
 export const currentDoc = writable(
   {
     id: '',
-    data:{
-      title: "Escolha um documento na lista", 
-      data: "",
-    },
+    title: "Escolha um documento na lista", 
+    data: "",
     geolocation: [], 
   }
 )
-export const loged = writable('loading')
 //======= AUTH OBSERVER ===============
 onAuthStateChanged(getAuth(), (user) => {
   if(user){
@@ -56,12 +54,13 @@ export const getDocs = () => {
   onSnapshot(collection(db, auth.currentUser.uid), (querySnapshot) => {
     let documentList = []
     querySnapshot.forEach((doc) => {
-      let docobj = {
-        id:doc.id,
-        data: doc.data(),
-        geolocation: doc.geolocation,
+      let obj = {
+        id: doc.id,
+        title: doc.data().title,
+        data: doc.data().data,
+        geolocation: doc.data().geolocation
       }
-      documentList.push(docobj)
+      documentList.push(obj)
     })
     docList.set(documentList)
   })
@@ -83,7 +82,7 @@ export const addDocument = () => {
   let documentObject = {
     title: 'Novo documento',
     data: '',
-    geolocation: []
+    geolocation: [],
   }
   const db = getFirestore()
   const auth = getAuth()
@@ -119,26 +118,4 @@ export const clickOutside = (node) => {
     }
   }
 }
-export const addLocation = (currentDoc) => {
-  navigator.geolocation.getCurrentPosition( position => {
-    const {latitude, longitude} = position.coords
-    
-    let date = new Date(position.timestamp)
-    let day = date.getDate()
-    let month = date.getMonth()+1
-    let year = date.getFullYear()
-    let hour = date.getHours()
-    let minute = date.getMinutes()
-    let second = date.getSeconds()
-    
-    let geolocation = `${latitude} ${longitude}`
-    let geolocation_date = `${day}/${month}/${year}`
-    let geolocation_time = `${hour}:${minute}:${second}`
-    let geoobj = {
-      date: geolocation_date,
-      time: geolocation_time,
-      coordinates: geolocation,
-    }
-    currentDoc.geolocation.concat(geoobj)
-  })
-}
+

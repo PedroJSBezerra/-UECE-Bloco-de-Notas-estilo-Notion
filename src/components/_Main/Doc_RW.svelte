@@ -10,8 +10,8 @@
     <div class="save" on:click="{() => updateDocument($currentDoc.id, $currentDoc)}">
       <div class="icon"><Icon_checked /></div>
     </div>
-    <h3 contenteditable="true" bind:innerHTML="{$currentDoc.data.title}"></h3>
-    <p contenteditable="true" bind:innerHTML="{$currentDoc.data.data}"></p>
+    <h3 contenteditable="true" bind:innerHTML="{$currentDoc.title}"></h3>
+    <p contenteditable="true" bind:innerHTML="{$currentDoc.data}"></p>
     <Geolocation />
   {:else}
     <h3>Escolha um documento no menu.</h3>
