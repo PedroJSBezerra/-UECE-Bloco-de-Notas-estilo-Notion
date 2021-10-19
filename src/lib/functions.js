@@ -3,7 +3,14 @@ import { initializeApp } from "firebase/app";
 import { writable } from 'svelte/store'
 import { getAuth, GoogleAuthProvider, signInWithPopup } from 'firebase/auth'
 import { onAuthStateChanged } from 'firebase/auth'
-import { getFirestore, doc, addDoc, updateDoc, deleteDoc, collection } from 'firebase/firestore'
+import { getFirestore, 
+  onSnapshot, 
+  doc, 
+  addDoc, 
+  updateDoc, 
+  deleteDoc, 
+  collection 
+} from 'firebase/firestore'
 
 //========= Initialize Firebase ==========
 initializeApp({
@@ -18,7 +25,16 @@ initializeApp({
 // ======== EXPORT DATA ==========
 export let docList = writable([])
 export const open = writable(false)
-export const currentDoc = writable({id: '', data:{title: "Escolha um documento na lista", data: ""}})
+export const currentDoc = writable(
+  {
+    id: '',
+    geolocation: [], 
+    data:{
+      title: "Escolha um documento na lista", 
+      data: ""
+    }
+  }
+)
 export const loged = writable('loading')
 //======= AUTH OBSERVER ===============
 onAuthStateChanged(getAuth(), (user) => {
@@ -31,15 +47,24 @@ onAuthStateChanged(getAuth(), (user) => {
   }
 })
 // //========= REALTIME DATABASE FROM FIRESTORE ==========
-// onSnapshot(collection(db, 'getAuth().currentUser.uid'), (querySnapshot) => {
-//   let documentList = []
-//   querySnapshot.forEach((doc) => {
-//     documentList.push(doc)
-//   })
-//   docList.set(documentList)
-//   console.log('snap!')
-// })
+export const getDocs = () => {
 
+  const db = getFirestore()
+  const auth = getAuth()
+
+  onSnapshot(collection(db, auth.currentUser.uid), (querySnapshot) => {
+    let documentList = []
+    querySnapshot.forEach((doc) => {
+      let docobj = {
+        id:doc.id,
+        geolocation: [],
+        data: doc.data()
+      }
+      documentList.push(docobj)
+    })
+    docList.set(documentList)
+  })
+}
 // ======== SOME FUNCTIONS =================
 export const login = () => {
   const auth = getAuth()
@@ -87,4 +112,7 @@ export const clickOutside = (node) => {
       document.removeEventListener('click', handleClick, true)
     }
   }
+}
+export const addLocation = () => {
+
 }

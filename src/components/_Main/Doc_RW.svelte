@@ -1,7 +1,7 @@
 <script>
   import Icon_checked from '../../assets/Icon_checked.svelte'
   import {currentDoc, updateDocument} from '../../lib/functions'
-
+  import Geolocation from './Geolocation.svelte'
   export let w
 </script>
 
@@ -12,6 +12,7 @@
     </div>
     <h3 contenteditable="true" bind:innerHTML="{$currentDoc.data.title}"></h3>
     <p contenteditable="true" bind:innerHTML="{$currentDoc.data.data}"></p>
+    <Geolocation />
   {:else}
     <h3>Escolha um documento no menu.</h3>
   {/if}

@@ -1,25 +1,8 @@
 <script>
   import AddDoc from './AddDoc.svelte'
   import Document from './Document.svelte'
-  import { docList } from '../../lib/functions'
-  import { getAuth } from 'firebase/auth'
-  import {onSnapshot, getFirestore, collection} from 'firebase/firestore'
-
-  const db = getFirestore()
-  const auth = getAuth()
-
-  onSnapshot(collection(db, auth.currentUser.uid), (querySnapshot) => {
-    let documentList = []
-    querySnapshot.forEach((doc) => {
-      let docobj = {
-        id:doc.id,
-        data: doc.data()
-      }
-      documentList.push(docobj)
-    })
-    docList.set(documentList)
-  })
-
+  import { docList, getDocs } from '../../lib/functions'
+  getDocs()
   export let w
 </script>
 
